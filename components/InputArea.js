@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
+import logo from "../assets/icons8-pen-100.png";
 
 function InputArea(props) {
   const [enteredTodo, setEnteredTodo] = useState("");
@@ -14,35 +22,53 @@ function InputArea(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Alışveriş yap, toplantıya katıl..."
-        onChangeText={inputHandler}
-        value={enteredTodo}
-      />
-      <Button title="Ekle" onPress={addTodoHandler} color="#5e0acc" />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <Image source={logo} style={styles.logo} />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Alışveriş yap, toplantıya katıl..."
+          onChangeText={inputHandler}
+          value={enteredTodo}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Ekle" onPress={addTodoHandler} color="#5e0acc" />
+          </View>
+          <View style={styles.button}>
+            <Button title="İptal" onPress={props.closeModal} color="#aaa" />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
   },
   textInput: {
-    width: "80%",
-    borderWidth: 1,
+    width: "90%",
+    borderBottomWidth: 1,
     borderRadius: 10,
     borderColor: "#ccc",
-    marginRight: 8,
-    padding: 8,
+    paddingHorizontal: 8,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+  button: {
+    width: "25%",
+    marginHorizontal: 8,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    margin: 24,
   },
 });
 

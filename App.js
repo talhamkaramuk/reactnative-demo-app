@@ -8,8 +8,10 @@ export default function App() {
   const [todos, setTodos] = useState([]);
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
+  // Test yorum
   function startModalHandler() {
     setModalIsVisible(true);
+    
   }
 
   function endModalHandler() {
